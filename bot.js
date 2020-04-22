@@ -71,6 +71,6 @@ client.on('message', async msg => {
   }
 });
 
-bot_secret_token = "Njk3OTE1NTQ1OTc0MjEwNjkx.XpoURA.ck1SJ3iGs5m43YAPP8oHMPvF-Co"
+
 
 client.login(bot_secret_token)
