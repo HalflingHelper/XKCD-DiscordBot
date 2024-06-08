@@ -1,9 +1,14 @@
-const { Client, MessageAttachment } = require('discord.js');
-const client = new Client();
+require('dotenv').config()
+const { Client, MessageAttachment, GatewayIntentBits } = require('discord.js');
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent
+  ] 
+});
 
-const fetch = require('node-fetch')
-
-
+const bot_secret_token = process.env.SECRET_TOKEN
 
 var canSend
 var maxComic;
@@ -14,10 +19,8 @@ client.on('ready', () => {
 
 });
 
-client.on('message', async msg => {
-  
+client.on('messageCreate', async msg => {
   if (msg.content.startsWith("XKCD")){
-    
     canSend = true
     maxComic = 2295
     
@@ -29,7 +32,6 @@ client.on('message', async msg => {
     
     if (stuff[1] == 'latest') {
       ComicID = maxComic
-      
     } else if (stuff[1] == 'random') {
       ComicID = (Math.floor(Math.random() * maxComic) + 1)
       lastComic = ComicID
